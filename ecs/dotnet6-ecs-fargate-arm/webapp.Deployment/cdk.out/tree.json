@@ -1,0 +1,690 @@
+{
+  "version": "tree-0.1",
+  "tree": {
+    "id": "App",
+    "path": "",
+    "children": {
+      "Tree": {
+        "id": "Tree",
+        "path": "Tree",
+        "constructInfo": {
+          "fqn": "@aws-cdk/core.Construct",
+          "version": "1.134.0"
+        }
+      },
+      "aspnetsix": {
+        "id": "aspnetsix",
+        "path": "aspnetsix",
+        "children": {
+          "Recipe": {
+            "id": "Recipe",
+            "path": "aspnetsix/Recipe",
+            "children": {
+              "AppVpc": {
+                "id": "AppVpc",
+                "path": "aspnetsix/Recipe/AppVpc",
+                "children": {
+                  "PublicSubnet1": {
+                    "id": "PublicSubnet1",
+                    "path": "aspnetsix/Recipe/AppVpc/PublicSubnet1",
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/core.Resource",
+                      "version": "1.134.0"
+                    }
+                  },
+                  "PublicSubnet2": {
+                    "id": "PublicSubnet2",
+                    "path": "aspnetsix/Recipe/AppVpc/PublicSubnet2",
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/core.Resource",
+                      "version": "1.134.0"
+                    }
+                  },
+                  "PublicSubnet3": {
+                    "id": "PublicSubnet3",
+                    "path": "aspnetsix/Recipe/AppVpc/PublicSubnet3",
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/core.Resource",
+                      "version": "1.134.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/core.Resource",
+                  "version": "1.134.0"
+                }
+              },
+              "AppIAMTaskRole": {
+                "id": "AppIAMTaskRole",
+                "path": "aspnetsix/Recipe/AppIAMTaskRole",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "aspnetsix/Recipe/AppIAMTaskRole/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                      "aws:cdk:cloudformation:props": {
+                        "assumeRolePolicyDocument": {
+                          "Statement": [
+                            {
+                              "Action": "sts:AssumeRole",
+                              "Effect": "Allow",
+                              "Principal": {
+                                "Service": "ecs-tasks.amazonaws.com"
+                              }
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-iam.CfnRole",
+                      "version": "1.134.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-iam.Role",
+                  "version": "1.134.0"
+                }
+              },
+              "EcsCluster": {
+                "id": "EcsCluster",
+                "path": "aspnetsix/Recipe/EcsCluster",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "aspnetsix/Recipe/EcsCluster/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::ECS::Cluster",
+                      "aws:cdk:cloudformation:props": {
+                        "clusterName": "aspnetsix"
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-ecs.CfnCluster",
+                      "version": "1.134.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-ecs.Cluster",
+                  "version": "1.134.0"
+                }
+              },
+              "AppTaskDefinition": {
+                "id": "AppTaskDefinition",
+                "path": "aspnetsix/Recipe/AppTaskDefinition",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "aspnetsix/Recipe/AppTaskDefinition/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::ECS::TaskDefinition",
+                      "aws:cdk:cloudformation:props": {
+                        "containerDefinitions": [
+                          {
+                            "essential": true,
+                            "image": {
+                              "Fn::Join": [
+                                "",
+                                [
+                                  "843953184916.dkr.ecr.eu-west-1.",
+                                  {
+                                    "Ref": "AWS::URLSuffix"
+                                  },
+                                  "/aspnetsix:637736294920317500"
+                                ]
+                              ]
+                            },
+                            "name": "AppContainerDefinition",
+                            "portMappings": [
+                              {
+                                "containerPort": 80,
+                                "protocol": "tcp"
+                              }
+                            ],
+                            "logConfiguration": {
+                              "logDriver": "awslogs",
+                              "options": {
+                                "awslogs-group": {
+                                  "Ref": "RecipeAppTaskDefinitionAppContainerDefinitionLogGroupB92358ED"
+                                },
+                                "awslogs-stream-prefix": "aspnetsix",
+                                "awslogs-region": "eu-west-1"
+                              }
+                            }
+                          }
+                        ],
+                        "cpu": "256",
+                        "executionRoleArn": {
+                          "Fn::GetAtt": [
+                            "RecipeAppTaskDefinitionExecutionRole3EC094E2",
+                            "Arn"
+                          ]
+                        },
+                        "family": "aspnetsixRecipeAppTaskDefinitionAA204BE9",
+                        "memory": "512",
+                        "networkMode": "awsvpc",
+                        "requiresCompatibilities": [
+                          "FARGATE"
+                        ],
+                        "runtimePlatform": {
+                          "cpuArchitecture": "ARM64",
+                          "operatingSystemFamily": "LINUX"
+                        },
+                        "taskRoleArn": {
+                          "Fn::GetAtt": [
+                            "RecipeAppIAMTaskRole35276CAE",
+                            "Arn"
+                          ]
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-ecs.CfnTaskDefinition",
+                      "version": "1.134.0"
+                    }
+                  },
+                  "AppContainerDefinition": {
+                    "id": "AppContainerDefinition",
+                    "path": "aspnetsix/Recipe/AppTaskDefinition/AppContainerDefinition",
+                    "children": {
+                      "LogGroup": {
+                        "id": "LogGroup",
+                        "path": "aspnetsix/Recipe/AppTaskDefinition/AppContainerDefinition/LogGroup",
+                        "children": {
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "aspnetsix/Recipe/AppTaskDefinition/AppContainerDefinition/LogGroup/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::Logs::LogGroup",
+                              "aws:cdk:cloudformation:props": {}
+                            },
+                            "constructInfo": {
+                              "fqn": "@aws-cdk/aws-logs.CfnLogGroup",
+                              "version": "1.134.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "@aws-cdk/aws-logs.LogGroup",
+                          "version": "1.134.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-ecs.ContainerDefinition",
+                      "version": "1.134.0"
+                    }
+                  },
+                  "ExecutionRole": {
+                    "id": "ExecutionRole",
+                    "path": "aspnetsix/Recipe/AppTaskDefinition/ExecutionRole",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "aspnetsix/Recipe/AppTaskDefinition/ExecutionRole/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                          "aws:cdk:cloudformation:props": {
+                            "assumeRolePolicyDocument": {
+                              "Statement": [
+                                {
+                                  "Action": "sts:AssumeRole",
+                                  "Effect": "Allow",
+                                  "Principal": {
+                                    "Service": "ecs-tasks.amazonaws.com"
+                                  }
+                                }
+                              ],
+                              "Version": "2012-10-17"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "@aws-cdk/aws-iam.CfnRole",
+                          "version": "1.134.0"
+                        }
+                      },
+                      "DefaultPolicy": {
+                        "id": "DefaultPolicy",
+                        "path": "aspnetsix/Recipe/AppTaskDefinition/ExecutionRole/DefaultPolicy",
+                        "children": {
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "aspnetsix/Recipe/AppTaskDefinition/ExecutionRole/DefaultPolicy/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                              "aws:cdk:cloudformation:props": {
+                                "policyDocument": {
+                                  "Statement": [
+                                    {
+                                      "Action": [
+                                        "ecr:BatchCheckLayerAvailability",
+                                        "ecr:GetDownloadUrlForLayer",
+                                        "ecr:BatchGetImage"
+                                      ],
+                                      "Effect": "Allow",
+                                      "Resource": {
+                                        "Fn::Join": [
+                                          "",
+                                          [
+                                            "arn:",
+                                            {
+                                              "Ref": "AWS::Partition"
+                                            },
+                                            ":ecr:eu-west-1:843953184916:repository/aspnetsix"
+                                          ]
+                                        ]
+                                      }
+                                    },
+                                    {
+                                      "Action": "ecr:GetAuthorizationToken",
+                                      "Effect": "Allow",
+                                      "Resource": "*"
+                                    },
+                                    {
+                                      "Action": [
+                                        "logs:CreateLogStream",
+                                        "logs:PutLogEvents"
+                                      ],
+                                      "Effect": "Allow",
+                                      "Resource": {
+                                        "Fn::GetAtt": [
+                                          "RecipeAppTaskDefinitionAppContainerDefinitionLogGroupB92358ED",
+                                          "Arn"
+                                        ]
+                                      }
+                                    }
+                                  ],
+                                  "Version": "2012-10-17"
+                                },
+                                "policyName": "RecipeAppTaskDefinitionExecutionRoleDefaultPolicy93CAFD0F",
+                                "roles": [
+                                  {
+                                    "Ref": "RecipeAppTaskDefinitionExecutionRole3EC094E2"
+                                  }
+                                ]
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "@aws-cdk/aws-iam.CfnPolicy",
+                              "version": "1.134.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "@aws-cdk/aws-iam.Policy",
+                          "version": "1.134.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-iam.Role",
+                      "version": "1.134.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-ecs.FargateTaskDefinition",
+                  "version": "1.134.0"
+                }
+              },
+              "EcrRepository": {
+                "id": "EcrRepository",
+                "path": "aspnetsix/Recipe/EcrRepository",
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-ecr.RepositoryBase",
+                  "version": "1.134.0"
+                }
+              },
+              "WebAccessSecurityGroup": {
+                "id": "WebAccessSecurityGroup",
+                "path": "aspnetsix/Recipe/WebAccessSecurityGroup",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "aspnetsix/Recipe/WebAccessSecurityGroup/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroup",
+                      "aws:cdk:cloudformation:props": {
+                        "groupDescription": "aspnetsix/Recipe/WebAccessSecurityGroup",
+                        "groupName": "aspnetsix-ECSService",
+                        "securityGroupEgress": [
+                          {
+                            "cidrIp": "0.0.0.0/0",
+                            "description": "Allow all outbound traffic by default",
+                            "ipProtocol": "-1"
+                          }
+                        ],
+                        "vpcId": "vpc-b02df2c9"
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-ec2.CfnSecurityGroup",
+                      "version": "1.134.0"
+                    }
+                  },
+                  "from aspnetsixRecipeServiceLoadBalancerSecurityGroup8079E9E0:80": {
+                    "id": "from aspnetsixRecipeServiceLoadBalancerSecurityGroup8079E9E0:80",
+                    "path": "aspnetsix/Recipe/WebAccessSecurityGroup/from aspnetsixRecipeServiceLoadBalancerSecurityGroup8079E9E0:80",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroupIngress",
+                      "aws:cdk:cloudformation:props": {
+                        "ipProtocol": "tcp",
+                        "description": "Load balancer to target",
+                        "fromPort": 80,
+                        "groupId": {
+                          "Fn::GetAtt": [
+                            "RecipeWebAccessSecurityGroup5C596925",
+                            "GroupId"
+                          ]
+                        },
+                        "sourceSecurityGroupId": {
+                          "Fn::GetAtt": [
+                            "RecipeServiceLoadBalancerSecurityGroup546712AE",
+                            "GroupId"
+                          ]
+                        },
+                        "toPort": 80
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-ec2.CfnSecurityGroupIngress",
+                      "version": "1.134.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-ec2.SecurityGroup",
+                  "version": "1.134.0"
+                }
+              },
+              "AppFargateService": {
+                "id": "AppFargateService",
+                "path": "aspnetsix/Recipe/AppFargateService",
+                "children": {
+                  "Service": {
+                    "id": "Service",
+                    "path": "aspnetsix/Recipe/AppFargateService/Service",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::ECS::Service",
+                      "aws:cdk:cloudformation:props": {
+                        "cluster": {
+                          "Ref": "RecipeEcsClusterB4EDBB7E"
+                        },
+                        "deploymentConfiguration": {
+                          "maximumPercent": 200,
+                          "minimumHealthyPercent": 50
+                        },
+                        "desiredCount": 3,
+                        "enableEcsManagedTags": false,
+                        "healthCheckGracePeriodSeconds": 60,
+                        "launchType": "FARGATE",
+                        "loadBalancers": [
+                          {
+                            "targetGroupArn": {
+                              "Ref": "RecipeServiceLoadBalancerLoadBalancerListenerServiceTargetGroupGroupC1883CA9"
+                            },
+                            "containerName": "AppContainerDefinition",
+                            "containerPort": 80
+                          }
+                        ],
+                        "networkConfiguration": {
+                          "awsvpcConfiguration": {
+                            "assignPublicIp": "ENABLED",
+                            "subnets": [
+                              "subnet-141e055c",
+                              "subnet-2f590c75",
+                              "subnet-15c1c973"
+                            ],
+                            "securityGroups": [
+                              {
+                                "Fn::GetAtt": [
+                                  "RecipeWebAccessSecurityGroup5C596925",
+                                  "GroupId"
+                                ]
+                              }
+                            ]
+                          }
+                        },
+                        "serviceName": "aspnetsix-service",
+                        "taskDefinition": {
+                          "Ref": "RecipeAppTaskDefinitionAC7F53DB"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-ecs.CfnService",
+                      "version": "1.134.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-ecs.FargateService",
+                  "version": "1.134.0"
+                }
+              },
+              "ServiceLoadBalancer": {
+                "id": "ServiceLoadBalancer",
+                "path": "aspnetsix/Recipe/ServiceLoadBalancer",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "aspnetsix/Recipe/ServiceLoadBalancer/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::ElasticLoadBalancingV2::LoadBalancer",
+                      "aws:cdk:cloudformation:props": {
+                        "loadBalancerAttributes": [
+                          {
+                            "key": "deletion_protection.enabled",
+                            "value": "false"
+                          }
+                        ],
+                        "scheme": "internet-facing",
+                        "securityGroups": [
+                          {
+                            "Fn::GetAtt": [
+                              "RecipeServiceLoadBalancerSecurityGroup546712AE",
+                              "GroupId"
+                            ]
+                          }
+                        ],
+                        "subnets": [
+                          "subnet-141e055c",
+                          "subnet-2f590c75",
+                          "subnet-15c1c973"
+                        ],
+                        "type": "application"
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-elasticloadbalancingv2.CfnLoadBalancer",
+                      "version": "1.134.0"
+                    }
+                  },
+                  "SecurityGroup": {
+                    "id": "SecurityGroup",
+                    "path": "aspnetsix/Recipe/ServiceLoadBalancer/SecurityGroup",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "aspnetsix/Recipe/ServiceLoadBalancer/SecurityGroup/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroup",
+                          "aws:cdk:cloudformation:props": {
+                            "groupDescription": "Automatically created Security Group for ELB aspnetsixRecipeServiceLoadBalancer38CBEC8A",
+                            "securityGroupIngress": [
+                              {
+                                "cidrIp": "0.0.0.0/0",
+                                "ipProtocol": "tcp",
+                                "fromPort": 80,
+                                "toPort": 80,
+                                "description": "Allow from anyone on port 80"
+                              }
+                            ],
+                            "vpcId": "vpc-b02df2c9"
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "@aws-cdk/aws-ec2.CfnSecurityGroup",
+                          "version": "1.134.0"
+                        }
+                      },
+                      "to aspnetsixRecipeWebAccessSecurityGroupAF53D8B4:80": {
+                        "id": "to aspnetsixRecipeWebAccessSecurityGroupAF53D8B4:80",
+                        "path": "aspnetsix/Recipe/ServiceLoadBalancer/SecurityGroup/to aspnetsixRecipeWebAccessSecurityGroupAF53D8B4:80",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroupEgress",
+                          "aws:cdk:cloudformation:props": {
+                            "groupId": {
+                              "Fn::GetAtt": [
+                                "RecipeServiceLoadBalancerSecurityGroup546712AE",
+                                "GroupId"
+                              ]
+                            },
+                            "ipProtocol": "tcp",
+                            "description": "Load balancer to target",
+                            "destinationSecurityGroupId": {
+                              "Fn::GetAtt": [
+                                "RecipeWebAccessSecurityGroup5C596925",
+                                "GroupId"
+                              ]
+                            },
+                            "fromPort": 80,
+                            "toPort": 80
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "@aws-cdk/aws-ec2.CfnSecurityGroupEgress",
+                          "version": "1.134.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-ec2.SecurityGroup",
+                      "version": "1.134.0"
+                    }
+                  },
+                  "LoadBalancerListener": {
+                    "id": "LoadBalancerListener",
+                    "path": "aspnetsix/Recipe/ServiceLoadBalancer/LoadBalancerListener",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "aspnetsix/Recipe/ServiceLoadBalancer/LoadBalancerListener/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::ElasticLoadBalancingV2::Listener",
+                          "aws:cdk:cloudformation:props": {
+                            "defaultActions": [
+                              {
+                                "type": "forward",
+                                "targetGroupArn": {
+                                  "Ref": "RecipeServiceLoadBalancerLoadBalancerListenerServiceTargetGroupGroupC1883CA9"
+                                }
+                              }
+                            ],
+                            "loadBalancerArn": {
+                              "Ref": "RecipeServiceLoadBalancer68534AEF"
+                            },
+                            "port": 80,
+                            "protocol": "HTTP"
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "@aws-cdk/aws-elasticloadbalancingv2.CfnListener",
+                          "version": "1.134.0"
+                        }
+                      },
+                      "ServiceTargetGroupGroup": {
+                        "id": "ServiceTargetGroupGroup",
+                        "path": "aspnetsix/Recipe/ServiceLoadBalancer/LoadBalancerListener/ServiceTargetGroupGroup",
+                        "children": {
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "aspnetsix/Recipe/ServiceLoadBalancer/LoadBalancerListener/ServiceTargetGroupGroup/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+                              "aws:cdk:cloudformation:props": {
+                                "healthCheckIntervalSeconds": 30,
+                                "healthCheckPath": "/",
+                                "healthyThresholdCount": 5,
+                                "port": 80,
+                                "protocol": "HTTP",
+                                "targetGroupAttributes": [
+                                  {
+                                    "key": "deregistration_delay.timeout_seconds",
+                                    "value": "60"
+                                  },
+                                  {
+                                    "key": "stickiness.enabled",
+                                    "value": "false"
+                                  }
+                                ],
+                                "targetType": "ip",
+                                "unhealthyThresholdCount": 2,
+                                "vpcId": "vpc-b02df2c9"
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "@aws-cdk/aws-elasticloadbalancingv2.CfnTargetGroup",
+                              "version": "1.134.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "@aws-cdk/aws-elasticloadbalancingv2.ApplicationTargetGroup",
+                          "version": "1.134.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-elasticloadbalancingv2.ApplicationListener",
+                      "version": "1.134.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-elasticloadbalancingv2.ApplicationLoadBalancer",
+                  "version": "1.134.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/core.Construct",
+              "version": "1.134.0"
+            }
+          },
+          "CDKMetadata": {
+            "id": "CDKMetadata",
+            "path": "aspnetsix/CDKMetadata",
+            "children": {
+              "Default": {
+                "id": "Default",
+                "path": "aspnetsix/CDKMetadata/Default",
+                "constructInfo": {
+                  "fqn": "@aws-cdk/core.CfnResource",
+                  "version": "1.134.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/core.Construct",
+              "version": "1.134.0"
+            }
+          }
+        },
+        "constructInfo": {
+          "fqn": "@aws-cdk/core.Stack",
+          "version": "1.134.0"
+        }
+      }
+    },
+    "constructInfo": {
+      "fqn": "@aws-cdk/core.App",
+      "version": "1.134.0"
+    }
+  }
+}

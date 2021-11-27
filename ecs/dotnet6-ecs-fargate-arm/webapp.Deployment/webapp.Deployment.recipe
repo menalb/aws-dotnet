@@ -1,0 +1,775 @@
+{
+  "Id": "148ef6c7-6c3f-454e-8150-fb021c4a4d88",
+  "Version": "0.1.0",
+  "Name": "Deployment project for webapp to Amazon Elastic Container Service",
+  "Description": "This ASP.NET Core application will be deployed to Amazon Elastic Container Service (Amazon ECS) with compute power managed by AWS Fargate compute engine. If your project does not contain a Dockerfile, it will be automatically generated. Recommended if you want to deploy your application as a container image on Linux.",
+  "ShortDescription": "ASP.NET Core application deployed to Amazon Elastic Container Service (Amazon ECS).",
+  "TargetService": "Amazon Elastic Container Service",
+  "DisplayedResources": [
+    {
+      "LogicalId": "RecipeServiceLoadBalancer68534AEF",
+      "Description": "Application Endpoint"
+    },
+    {
+      "LogicalId": "RecipeAppFargateService71FD6243",
+      "Description": "ECS Service"
+    },
+    {
+      "LogicalId": "RecipeEcsClusterB4EDBB7E",
+      "Description": "ECS Cluster"
+    }
+  ],
+  "DeploymentType": "CdkProject",
+  "DeploymentBundle": "Container",
+  "RecommendationRules": [
+    {
+      "Tests": [
+        {
+          "Type": "MSProjectSdkAttribute",
+          "Condition": {
+            "Value": "Microsoft.NET.Sdk.Web"
+          }
+        },
+        {
+          "Type": "MSProperty",
+          "Condition": {
+            "PropertyName": "TargetFramework",
+            "AllowedValues": [
+              "netcoreapp2.1",
+              "netcoreapp3.1",
+              "net5.0",
+              "net6.0"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "Tests": [
+        {
+          "Type": "MSPropertyExists",
+          "Condition": {
+            "PropertyName": "AWSProjectType"
+          }
+        }
+      ],
+      "Effect": {
+        "Pass": {
+          "Include": false
+        },
+        "Fail": {
+          "Include": true
+        }
+      }
+    }
+  ],
+  "OptionSettings": [
+    {
+      "Id": "ECSCluster",
+      "Name": "ECS Cluster",
+      "Description": "The ECS cluster used for the deployment.",
+      "Type": "Object",
+      "TypeHint": "ECSCluster",
+      "AdvancedSetting": false,
+      "Updatable": false,
+      "ChildOptionSettings": [
+        {
+          "Id": "CreateNew",
+          "Name": "Create New ECS Cluster",
+          "Description": "Do you want to create a new ECS cluster?",
+          "Type": "Bool",
+          "DefaultValue": true,
+          "AdvancedSetting": false,
+          "Updatable": false
+        },
+        {
+          "Id": "ClusterArn",
+          "Name": "Existing Cluster ARN",
+          "Description": "The ARN of the existing cluster to use.",
+          "Type": "String",
+          "AdvancedSetting": false,
+          "Updatable": false,
+          "Validators": [
+            {
+              "ValidatorType": "Regex",
+              "Configuration": {
+                "Regex": "arn:[^:]+:ecs:[^:]*:[0-9]{12}:cluster/.+",
+                "AllowEmptyString": true,
+                "ValidationFailedMessage": "Invalid cluster Arn. The ARN should contain the arn:[PARTITION]:ecs namespace, followed by the Region of the cluster, the AWS account ID of the cluster owner, the cluster namespace, and then the cluster name. For example, arn:aws:ecs:region:012345678910:cluster/test. For more information visit https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_Cluster.html"
+              }
+            }
+          ],
+          "DependsOn": [
+            {
+              "Id": "ECSCluster.CreateNew",
+              "Value": false
+            }
+          ]
+        },
+        {
+          "Id": "NewClusterName",
+          "Name": "New Cluster Name",
+          "Description": "The name of the new cluster to create.",
+          "Type": "String",
+          "DefaultValue": "{StackName}",
+          "AdvancedSetting": false,
+          "Updatable": false,
+          "Validators": [
+            {
+              "ValidatorType": "Regex",
+              "Configuration": {
+                "Regex": "^([A-Za-z0-9_-]{1,255})$",
+                "AllowEmptyString": true,
+                "ValidationFailedMessage": "Invalid cluster name. The cluster name can only contain letters (case-sensitive), numbers, hyphens, underscores and can't be longer than 255 character in length."
+              }
+            }
+          ],
+          "DependsOn": [
+            {
+              "Id": "ECSCluster.CreateNew",
+              "Value": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Id": "ECSServiceName",
+      "ParentSettingId": "ClusterName",
+      "Name": "ECS Service Name",
+      "Description": "The name of the ECS service running in the cluster.",
+      "Type": "String",
+      "TypeHint": "ECSService",
+      "DefaultValue": "{StackName}-service",
+      "AdvancedSetting": false,
+      "Updatable": false,
+      "Validators": [
+        {
+          "ValidatorType": "Regex",
+          "Configuration": {
+            "Regex": "^([A-Za-z0-9_-]{1,255})$",
+            "ValidationFailedMessage": "Invalid service name. The service name can only contain letters (case-sensitive), numbers, hyphens, underscores and can't be longer than 255 character in length."
+          }
+        }
+      ]
+    },
+    {
+      "Id": "DesiredCount",
+      "Name": "Desired Task Count",
+      "Description": "The desired number of ECS tasks to run for the service.",
+      "Type": "Int",
+      "DefaultValue": 3,
+      "AdvancedSetting": false,
+      "Updatable": true,
+      "Validators": [
+        {
+          "ValidatorType": "Range",
+          "Configuration": {
+            "Min": 1,
+            "Max": 5000
+          }
+        }
+      ]
+    },
+    {
+      "Id": "ApplicationIAMRole",
+      "Name": "Application IAM Role",
+      "Description": "The Identity and Access Management (IAM) role that provides AWS credentials to the application to access AWS services.",
+      "Type": "Object",
+      "TypeHint": "IAMRole",
+      "AdvancedSetting": false,
+      "Updatable": true,
+      "ChildOptionSettings": [
+        {
+          "Id": "CreateNew",
+          "Name": "Create New Role",
+          "Description": "Do you want to create a new role?",
+          "Type": "Bool",
+          "DefaultValue": true,
+          "AdvancedSetting": false,
+          "Updatable": true
+        },
+        {
+          "Id": "RoleArn",
+          "Name": "Existing Role ARN",
+          "Description": "The ARN of the existing role to use.",
+          "Type": "String",
+          "AdvancedSetting": false,
+          "Updatable": true,
+          "Validators": [
+            {
+              "ValidatorType": "Regex",
+              "Configuration": {
+                "Regex": "arn:.+:iam::[0-9]{12}:.+",
+                "AllowEmptyString": true,
+                "ValidationFailedMessage": "Invalid IAM Role ARN. The ARN should contain the arn:[PARTITION]:iam namespace, followed by the account ID, and then the resource path. For example - arn:aws:iam::123456789012:role/S3Access is a valid IAM Role ARN. For more information visit https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns"
+              }
+            }
+          ],
+          "DependsOn": [
+            {
+              "Id": "ApplicationIAMRole.CreateNew",
+              "Value": false
+            }
+          ]
+        }
+      ],
+      "TypeHintData": {
+        "ServicePrincipal": "ecs-tasks.amazonaws.com"
+      }
+    },
+    {
+      "Id": "Vpc",
+      "Name": "Virtual Private Cloud (VPC)",
+      "Description": "A VPC enables you to launch the application into a virtual network that you've defined.",
+      "Type": "Object",
+      "TypeHint": "Vpc",
+      "AdvancedSetting": false,
+      "Updatable": false,
+      "ChildOptionSettings": [
+        {
+          "Id": "IsDefault",
+          "Name": "Use default VPC",
+          "Description": "Do you want to use the default VPC for the deployment?",
+          "Type": "Bool",
+          "DefaultValue": true,
+          "AdvancedSetting": false,
+          "Updatable": false
+        },
+        {
+          "Id": "CreateNew",
+          "Name": "Create New VPC",
+          "Description": "Do you want to create a new VPC?",
+          "Type": "Bool",
+          "DefaultValue": false,
+          "AdvancedSetting": false,
+          "Updatable": false,
+          "DependsOn": [
+            {
+              "Id": "Vpc.IsDefault",
+              "Value": false
+            }
+          ]
+        },
+        {
+          "Id": "VpcId",
+          "Name": "Existing VPC ID",
+          "Description": "The ID of the existing VPC to use.",
+          "Type": "String",
+          "AdvancedSetting": false,
+          "Updatable": false,
+          "Validators": [
+            {
+              "ValidatorType": "Regex",
+              "Configuration": {
+                "Regex": "^vpc-([0-9a-f]{8}|[0-9a-f]{17})$",
+                "AllowEmptyString": true,
+                "ValidationFailedMessage": "Invalid VPC ID. The VPC ID must start with the \"vpc-\" prefix, followed by either 8 or 17 characters consisting of digits and letters(lower-case) from a to f. For example vpc-abc88de9 is a valid VPC ID."
+              }
+            }
+          ],
+          "DependsOn": [
+            {
+              "Id": "Vpc.IsDefault",
+              "Value": false
+            },
+            {
+              "Id": "Vpc.CreateNew",
+              "Value": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Id": "AdditionalECSServiceSecurityGroups",
+      "Name": "ECS Service Security Groups",
+      "Description": "A comma-delimited list of EC2 security groups to assign to the ECS service. This is commonly used to provide access to Amazon RDS databases running in their own security groups.",
+      "Type": "String",
+      "DefaultValue": "",
+      "AdvancedSetting": true,
+      "Updatable": true
+    },
+    {
+      "Id": "TaskCpu",
+      "Name": "Task CPU",
+      "Description": "The number of CPU units used by the task. See the following for details on CPU values: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/AWS_Fargate.html#fargate-task-defs",
+      "Type": "Int",
+      "DefaultValue": 256,
+      "AdvancedSetting": true,
+      "Updatable": true,
+      "AllowedValues": [
+        "256",
+        "512",
+        "1024",
+        "2048",
+        "4096"
+      ],
+      "ValueMapping": {
+        "256": "256 (.25 vCPU)",
+        "512": "512 (.5 vCPU)",
+        "1024": "1024 (1 vCPU)",
+        "2048": "2048 (2 vCPU)",
+        "4096": "4096 (4 vCPU)"
+      }
+    },
+    {
+      "Id": "TaskMemory",
+      "Name": "Task Memory",
+      "Description": "The amount of memory (in MB) used by the task. See the following for details on memory values: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/AWS_Fargate.html#fargate-task-defs",
+      "Type": "Int",
+      "DefaultValue": 512,
+      "AdvancedSetting": true,
+      "Updatable": true,
+      "AllowedValues": [
+        "512",
+        "1024",
+        "2048",
+        "3072",
+        "4096",
+        "5120",
+        "6144",
+        "7168",
+        "8192",
+        "9216",
+        "10240",
+        "11264",
+        "12288",
+        "13312",
+        "14336",
+        "15360",
+        "16384",
+        "17408",
+        "18432",
+        "19456",
+        "20480",
+        "21504",
+        "22528",
+        "23552",
+        "24576",
+        "25600",
+        "26624",
+        "27648",
+        "28672",
+        "29696",
+        "30720"
+      ],
+      "ValueMapping": {
+        "512": "0.5 GB",
+        "1024": "1 GB",
+        "2048": "2 GB",
+        "3072": "3 GB",
+        "4096": "4 GB",
+        "5120": "5 GB",
+        "6144": "6 GB",
+        "7168": "7 GB",
+        "8192": "8 GB",
+        "9216": "9 GB",
+        "10240": "10 GB",
+        "11264": "11 GB",
+        "12288": "12 GB",
+        "13312": "13 GB",
+        "14336": "14 GB",
+        "15360": "15 GB",
+        "16384": "16 GB",
+        "17408": "17 GB",
+        "18432": "18 GB",
+        "19456": "19 GB",
+        "20480": "20 GB",
+        "21504": "21 GB",
+        "22528": "22 GB",
+        "23552": "23 GB",
+        "24576": "24 GB",
+        "25600": "25 GB",
+        "26624": "26 GB",
+        "27648": "27 GB",
+        "28672": "28 GB",
+        "29696": "29 GB",
+        "30720": "30 GB"
+      }
+    },
+    {
+      "Id": "LoadBalancer",
+      "Name": "Elastic Load Balancer",
+      "Description": "Load Balancer the ECS Service will register tasks to.",
+      "Type": "Object",
+      "AdvancedSetting": true,
+      "Updatable": true,
+      "ChildOptionSettings": [
+        {
+          "Id": "CreateNew",
+          "Name": "Create New Load Balancer",
+          "Description": "Do you want to create a new Load Balancer?",
+          "Type": "Bool",
+          "DefaultValue": true,
+          "AdvancedSetting": false,
+          "Updatable": false
+        },
+        {
+          "Id": "ExistingLoadBalancerArn",
+          "Name": "Existing Load Balancer ARN",
+          "Description": "The ARN of an existing load balancer to use.",
+          "Type": "String",
+          "TypeHint": "ExistingApplicationLoadBalancer",
+          "AdvancedSetting": false,
+          "Updatable": false,
+          "DependsOn": [
+            {
+              "Id": "LoadBalancer.CreateNew",
+              "Value": false
+            }
+          ]
+        },
+        {
+          "Id": "DeregistrationDelayInSeconds",
+          "Name": "Deregistration delay (seconds)",
+          "Description": "The amount of time to allow requests to finish before deregistering ECS tasks.",
+          "Type": "Int",
+          "DefaultValue": 60,
+          "AdvancedSetting": true,
+          "Updatable": true
+        },
+        {
+          "Id": "HealthCheckPath",
+          "Name": "Health Check Path",
+          "Description": "The ping path destination where Elastic Load Balancing sends health check requests.",
+          "Type": "String",
+          "DefaultValue": "/",
+          "AdvancedSetting": true,
+          "Updatable": true
+        },
+        {
+          "Id": "HealthCheckInternval",
+          "Name": "Health Check Interval",
+          "Description": "The number of consecutive health check successes required before considering an unhealthy target healthy.",
+          "Type": "Int",
+          "DefaultValue": 30,
+          "AdvancedSetting": true,
+          "Updatable": true
+        },
+        {
+          "Id": "HealthyThresholdCount",
+          "Name": "Healthy Threshold Count",
+          "Description": "The number of consecutive health check successes required before considering an unhealthy target healthy.",
+          "Type": "Int",
+          "DefaultValue": 5,
+          "AdvancedSetting": true,
+          "Updatable": true
+        },
+        {
+          "Id": "UnhealthyThresholdCount",
+          "Name": "Unhealthy Threshold Count",
+          "Description": "The number of consecutive health check successes required before considering an unhealthy target unhealthy.",
+          "Type": "Int",
+          "DefaultValue": 2,
+          "AdvancedSetting": true,
+          "Updatable": true
+        },
+        {
+          "Id": "ListenerConditionType",
+          "Name": "Type of Listener Condition",
+          "Description": "The type of listener rule to create to direct traffic to ECS service.",
+          "Type": "String",
+          "DefaultValue": "None",
+          "AdvancedSetting": false,
+          "Updatable": true,
+          "AllowedValues": [
+            "None",
+            "Path"
+          ],
+          "DependsOn": [
+            {
+              "Id": "LoadBalancer.CreateNew",
+              "Value": false
+            }
+          ]
+        },
+        {
+          "Id": "ListenerConditionPathPattern",
+          "Name": "Listener Condition Path Pattern",
+          "Description": "The resource path pattern to use for the listener rule. (i.e. \"/api/*\") ",
+          "Type": "String",
+          "AdvancedSetting": false,
+          "Updatable": true,
+          "DependsOn": [
+            {
+              "Id": "LoadBalancer.CreateNew",
+              "Value": false
+            },
+            {
+              "Id": "LoadBalancer.ListenerConditionType",
+              "Value": "Path"
+            }
+          ]
+        },
+        {
+          "Id": "ListenerConditionPriority",
+          "Name": "Listener Condition Priority",
+          "Description": "Priority of the condition rule. The value must be unique for the Load Balancer listener.",
+          "Type": "Double",
+          "DefaultValue": 100,
+          "AdvancedSetting": false,
+          "Updatable": true,
+          "DependsOn": [
+            {
+              "Id": "LoadBalancer.CreateNew",
+              "Value": false
+            },
+            {
+              "Id": "LoadBalancer.ListenerConditionType",
+              "Value": "Path"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Id": "AutoScaling",
+      "Name": "AutoScaling",
+      "Description": "The AutoScaling configuration for the ECS service.",
+      "Type": "Object",
+      "AdvancedSetting": true,
+      "Updatable": true,
+      "ChildOptionSettings": [
+        {
+          "Id": "Enabled",
+          "Name": "Enable",
+          "Description": "Do you want to enable AutoScaling?",
+          "Type": "Bool",
+          "DefaultValue": false,
+          "AdvancedSetting": false,
+          "Updatable": true
+        },
+        {
+          "Id": "MinCapacity",
+          "Name": "Minimum Capacity",
+          "Description": "The minimum number of ECS tasks handling the demand for the ECS service.",
+          "Type": "Int",
+          "DefaultValue": 3,
+          "AdvancedSetting": false,
+          "Updatable": true,
+          "DependsOn": [
+            {
+              "Id": "AutoScaling.Enabled",
+              "Value": true
+            }
+          ]
+        },
+        {
+          "Id": "MaxCapacity",
+          "Name": "Maximum Capacity",
+          "Description": "The maximum number of ECS tasks handling the demand for the ECS service.",
+          "Type": "Int",
+          "DefaultValue": 6,
+          "AdvancedSetting": false,
+          "Updatable": true,
+          "DependsOn": [
+            {
+              "Id": "AutoScaling.Enabled",
+              "Value": true
+            }
+          ]
+        },
+        {
+          "Id": "ScalingType",
+          "Name": "AutoScaling Metric",
+          "Description": "The metric to monitor for scaling changes.",
+          "Type": "String",
+          "DefaultValue": "Cpu",
+          "AdvancedSetting": false,
+          "Updatable": true,
+          "AllowedValues": [
+            "Cpu",
+            "Memory",
+            "Request"
+          ],
+          "DependsOn": [
+            {
+              "Id": "AutoScaling.Enabled",
+              "Value": true
+            }
+          ]
+        },
+        {
+          "Id": "CpuTypeTargetUtilizationPercent",
+          "Name": "CPU Target Utilization",
+          "Description": "The target cpu utilization that triggers a scaling change.",
+          "Type": "Double",
+          "DefaultValue": 70,
+          "AdvancedSetting": false,
+          "Updatable": true,
+          "DependsOn": [
+            {
+              "Id": "AutoScaling.Enabled",
+              "Value": true
+            },
+            {
+              "Id": "AutoScaling.ScalingType",
+              "Value": "Cpu"
+            }
+          ]
+        },
+        {
+          "Id": "CpuTypeScaleInCooldownSeconds",
+          "Name": "Scale in cooldown (seconds)",
+          "Description": "The amount of time, in seconds, after a scale in activity completes before another scale in activity can start.",
+          "Type": "Int",
+          "DefaultValue": 300,
+          "AdvancedSetting": false,
+          "Updatable": true,
+          "DependsOn": [
+            {
+              "Id": "AutoScaling.Enabled",
+              "Value": true
+            },
+            {
+              "Id": "AutoScaling.ScalingType",
+              "Value": "Cpu"
+            }
+          ]
+        },
+        {
+          "Id": "CpuTypeScaleOutCooldownSeconds",
+          "Name": "Scale out cooldown (seconds)",
+          "Description": "The amount of time, in seconds, after a scale out activity completes before another scale out activity can start.",
+          "Type": "Int",
+          "DefaultValue": 300,
+          "AdvancedSetting": false,
+          "Updatable": true,
+          "DependsOn": [
+            {
+              "Id": "AutoScaling.Enabled",
+              "Value": true
+            },
+            {
+              "Id": "AutoScaling.ScalingType",
+              "Value": "Cpu"
+            }
+          ]
+        },
+        {
+          "Id": "MemoryTypeTargetUtilizationPercent",
+          "Name": "Memory Target Utilization",
+          "Description": "The target memory utilization that triggers a scaling change.",
+          "Type": "Double",
+          "DefaultValue": 70,
+          "AdvancedSetting": false,
+          "Updatable": true,
+          "DependsOn": [
+            {
+              "Id": "AutoScaling.Enabled",
+              "Value": true
+            },
+            {
+              "Id": "AutoScaling.ScalingType",
+              "Value": "Memory"
+            }
+          ]
+        },
+        {
+          "Id": "MemoryTypeScaleInCooldownSeconds",
+          "Name": "Scale in cooldown (seconds)",
+          "Description": "The amount of time, in seconds, after a scale in activity completes before another scale in activity can start.",
+          "Type": "Int",
+          "DefaultValue": 300,
+          "AdvancedSetting": false,
+          "Updatable": true,
+          "DependsOn": [
+            {
+              "Id": "AutoScaling.Enabled",
+              "Value": true
+            },
+            {
+              "Id": "AutoScaling.ScalingType",
+              "Value": "Memory"
+            }
+          ]
+        },
+        {
+          "Id": "MemoryTypeScaleOutCooldownSeconds",
+          "Name": "Scale out cooldown (seconds)",
+          "Description": "The amount of time, in seconds, after a scale out activity completes before another scale out activity can start.",
+          "Type": "Int",
+          "DefaultValue": 300,
+          "AdvancedSetting": false,
+          "Updatable": true,
+          "DependsOn": [
+            {
+              "Id": "AutoScaling.Enabled",
+              "Value": true
+            },
+            {
+              "Id": "AutoScaling.ScalingType",
+              "Value": "Memory"
+            }
+          ]
+        },
+        {
+          "Id": "RequestTypeRequestsPerTarget",
+          "Name": "Request per task",
+          "Description": "The number of request per ECS task that triggers a scaling change.",
+          "Type": "Int",
+          "DefaultValue": 1000,
+          "AdvancedSetting": false,
+          "Updatable": true,
+          "DependsOn": [
+            {
+              "Id": "AutoScaling.Enabled",
+              "Value": true
+            },
+            {
+              "Id": "AutoScaling.ScalingType",
+              "Value": "Request"
+            }
+          ]
+        },
+        {
+          "Id": "RequestTypeScaleInCooldownSeconds",
+          "Name": "Scale in cooldown (seconds)",
+          "Description": "The amount of time, in seconds, after a scale in activity completes before another scale in activity can start.",
+          "Type": "Int",
+          "DefaultValue": 300,
+          "AdvancedSetting": false,
+          "Updatable": true,
+          "DependsOn": [
+            {
+              "Id": "AutoScaling.Enabled",
+              "Value": true
+            },
+            {
+              "Id": "AutoScaling.ScalingType",
+              "Value": "Request"
+            }
+          ]
+        },
+        {
+          "Id": "RequestTypeScaleOutCooldownSeconds",
+          "Name": "Scale out cooldown (seconds)",
+          "Description": "The amount of time, in seconds, after a scale out activity completes before another scale out activity can start.",
+          "Type": "Int",
+          "DefaultValue": 300,
+          "AdvancedSetting": false,
+          "Updatable": true,
+          "DependsOn": [
+            {
+              "Id": "AutoScaling.Enabled",
+              "Value": true
+            },
+            {
+              "Id": "AutoScaling.ScalingType",
+              "Value": "Request"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "Validators": [
+    {
+      "ValidatorType": "FargateTaskSizeCpuMemoryLimits"
+    }
+  ],
+  "RecipePriority": 1000,
+  "PersistedDeploymentProject": true,
+  "BaseRecipeId": "AspNetAppEcsFargate"
+}

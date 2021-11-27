@@ -1,0 +1,408 @@
+{
+  "version": "15.0.0",
+  "artifacts": {
+    "Tree": {
+      "type": "cdk:tree",
+      "properties": {
+        "file": "tree.json"
+      }
+    },
+    "aspnetsix": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://843953184916/eu-west-1",
+      "properties": {
+        "templateFile": "aspnetsix.template.json",
+        "tags": {
+          "aws-dotnet-deploy": "148ef6c7-6c3f-454e-8150-fb021c4a4d88"
+        },
+        "validateOnSynth": false
+      },
+      "metadata": {
+        "/aspnetsix": [
+          {
+            "type": "aws:cdk:stack-tags",
+            "data": [
+              {
+                "Key": "aws-dotnet-deploy",
+                "Value": "148ef6c7-6c3f-454e-8150-fb021c4a4d88"
+              }
+            ],
+            "trace": [
+              "ConstructNode.addMetadata (C:\\Users\\Alberto MD\\AppData\\Local\\Temp\\jsii-kernel-ZOcOq0\\node_modules\\@aws-cdk\\core\\lib\\construct-compat.js:416:62)",
+              "Object.addStackArtifactToAssembly (C:\\Users\\Alberto MD\\AppData\\Local\\Temp\\jsii-kernel-ZOcOq0\\node_modules\\@aws-cdk\\core\\lib\\stack-synthesizers\\_shared.js:22:20)",
+              "LegacyStackSynthesizer.emitStackArtifact (C:\\Users\\Alberto MD\\AppData\\Local\\Temp\\jsii-kernel-ZOcOq0\\node_modules\\@aws-cdk\\core\\lib\\stack-synthesizers\\stack-synthesizer.js:42:19)",
+              "LegacyStackSynthesizer.synthesize (C:\\Users\\Alberto MD\\AppData\\Local\\Temp\\jsii-kernel-ZOcOq0\\node_modules\\@aws-cdk\\core\\lib\\stack-synthesizers\\legacy.js:129:14)",
+              "C:\\Users\\Alberto MD\\AppData\\Local\\Temp\\jsii-kernel-ZOcOq0\\node_modules\\@aws-cdk\\core\\lib\\private\\synthesis.js:155:35",
+              "visit (C:\\Users\\Alberto MD\\AppData\\Local\\Temp\\jsii-kernel-ZOcOq0\\node_modules\\@aws-cdk\\core\\lib\\private\\synthesis.js:200:9)",
+              "visit (C:\\Users\\Alberto MD\\AppData\\Local\\Temp\\jsii-kernel-ZOcOq0\\node_modules\\@aws-cdk\\core\\lib\\private\\synthesis.js:197:9)",
+              "synthesizeTree (C:\\Users\\Alberto MD\\AppData\\Local\\Temp\\jsii-kernel-ZOcOq0\\node_modules\\@aws-cdk\\core\\lib\\private\\synthesis.js:148:5)",
+              "Object.synthesize (C:\\Users\\Alberto MD\\AppData\\Local\\Temp\\jsii-kernel-ZOcOq0\\node_modules\\@aws-cdk\\core\\lib\\private\\synthesis.js:33:5)",
+              "App.synth (C:\\Users\\Alberto MD\\AppData\\Local\\Temp\\jsii-kernel-ZOcOq0\\node_modules\\@aws-cdk\\core\\lib\\stage.js:103:41)",
+              "C:\\tmp\\ltably3k.4mu\\lib\\program.js:8248:134",
+              "Kernel._wrapSandboxCode (C:\\tmp\\ltably3k.4mu\\lib\\program.js:8860:24)",
+              "C:\\tmp\\ltably3k.4mu\\lib\\program.js:8248:107",
+              "Kernel._ensureSync (C:\\tmp\\ltably3k.4mu\\lib\\program.js:8841:28)",
+              "Kernel.invoke (C:\\tmp\\ltably3k.4mu\\lib\\program.js:8248:34)",
+              "KernelHost.processRequest (C:\\tmp\\ltably3k.4mu\\lib\\program.js:9757:36)",
+              "KernelHost.run (C:\\tmp\\ltably3k.4mu\\lib\\program.js:9720:22)",
+              "Immediate._onImmediate (C:\\tmp\\ltably3k.4mu\\lib\\program.js:9721:46)",
+              "processImmediate (internal/timers.js:456:21)"
+            ]
+          }
+        ],
+        "/aspnetsix/Recipe/AppIAMTaskRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "RecipeAppIAMTaskRole35276CAE",
+            "trace": [
+              "new Role (C:\\Users\\Alberto MD\\AppData\\Local\\Temp\\jsii-kernel-ZOcOq0\\node_modules\\@aws-cdk\\aws-iam\\lib\\role.js:74:22)",
+              "C:\\tmp\\ltably3k.4mu\\lib\\program.js:8432:58",
+              "Kernel._wrapSandboxCode (C:\\tmp\\ltably3k.4mu\\lib\\program.js:8860:24)",
+              "Kernel._create (C:\\tmp\\ltably3k.4mu\\lib\\program.js:8432:34)",
+              "Kernel.create (C:\\tmp\\ltably3k.4mu\\lib\\program.js:8173:29)",
+              "KernelHost.processRequest (C:\\tmp\\ltably3k.4mu\\lib\\program.js:9757:36)",
+              "KernelHost.run (C:\\tmp\\ltably3k.4mu\\lib\\program.js:9720:22)",
+              "Immediate._onImmediate (C:\\tmp\\ltably3k.4mu\\lib\\program.js:9721:46)",
+              "processImmediate (internal/timers.js:456:21)"
+            ]
+          }
+        ],
+        "/aspnetsix/Recipe/EcsCluster/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "RecipeEcsClusterB4EDBB7E",
+            "trace": [
+              "new Cluster (C:\\Users\\Alberto MD\\AppData\\Local\\Temp\\jsii-kernel-ZOcOq0\\node_modules\\@aws-cdk\\aws-ecs\\lib\\cluster.js:81:25)",
+              "C:\\tmp\\ltably3k.4mu\\lib\\program.js:8432:58",
+              "Kernel._wrapSandboxCode (C:\\tmp\\ltably3k.4mu\\lib\\program.js:8860:24)",
+              "Kernel._create (C:\\tmp\\ltably3k.4mu\\lib\\program.js:8432:34)",
+              "Kernel.create (C:\\tmp\\ltably3k.4mu\\lib\\program.js:8173:29)",
+              "KernelHost.processRequest (C:\\tmp\\ltably3k.4mu\\lib\\program.js:9757:36)",
+              "KernelHost.run (C:\\tmp\\ltably3k.4mu\\lib\\program.js:9720:22)",
+              "Immediate._onImmediate (C:\\tmp\\ltably3k.4mu\\lib\\program.js:9721:46)",
+              "processImmediate (internal/timers.js:456:21)"
+            ]
+          }
+        ],
+        "/aspnetsix/Recipe/AppTaskDefinition/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "RecipeAppTaskDefinitionAC7F53DB",
+            "trace": [
+              "new TaskDefinition (C:\\Users\\Alberto MD\\AppData\\Local\\Temp\\jsii-kernel-ZOcOq0\\node_modules\\@aws-cdk\\aws-ecs\\lib\\base\\task-definition.js:106:25)",
+              "new FargateTaskDefinition (C:\\Users\\Alberto MD\\AppData\\Local\\Temp\\jsii-kernel-ZOcOq0\\node_modules\\@aws-cdk\\aws-ecs\\lib\\fargate\\fargate-task-definition.js:23:9)",
+              "C:\\tmp\\ltably3k.4mu\\lib\\program.js:8432:58",
+              "Kernel._wrapSandboxCode (C:\\tmp\\ltably3k.4mu\\lib\\program.js:8860:24)",
+              "Kernel._create (C:\\tmp\\ltably3k.4mu\\lib\\program.js:8432:34)",
+              "Kernel.create (C:\\tmp\\ltably3k.4mu\\lib\\program.js:8173:29)",
+              "KernelHost.processRequest (C:\\tmp\\ltably3k.4mu\\lib\\program.js:9757:36)",
+              "KernelHost.run (C:\\tmp\\ltably3k.4mu\\lib\\program.js:9720:22)",
+              "Immediate._onImmediate (C:\\tmp\\ltably3k.4mu\\lib\\program.js:9721:46)",
+              "processImmediate (internal/timers.js:456:21)"
+            ]
+          }
+        ],
+        "/aspnetsix/Recipe/AppTaskDefinition/AppContainerDefinition/LogGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "RecipeAppTaskDefinitionAppContainerDefinitionLogGroupB92358ED",
+            "trace": [
+              "new LogGroup (C:\\Users\\Alberto MD\\AppData\\Local\\Temp\\jsii-kernel-ZOcOq0\\node_modules\\@aws-cdk\\aws-logs\\lib\\log-group.js:183:26)",
+              "AwsLogDriver.bind (C:\\Users\\Alberto MD\\AppData\\Local\\Temp\\jsii-kernel-ZOcOq0\\node_modules\\@aws-cdk\\aws-ecs\\lib\\log-drivers\\aws-log-driver.js:48:48)",
+              "C:\\tmp\\ltably3k.4mu\\lib\\program.js:8248:134",
+              "Kernel._wrapSandboxCode (C:\\tmp\\ltably3k.4mu\\lib\\program.js:8860:24)",
+              "C:\\tmp\\ltably3k.4mu\\lib\\program.js:8248:107",
+              "Kernel._ensureSync (C:\\tmp\\ltably3k.4mu\\lib\\program.js:8841:28)",
+              "Kernel.invoke (C:\\tmp\\ltably3k.4mu\\lib\\program.js:8248:34)",
+              "KernelHost.processRequest (C:\\tmp\\ltably3k.4mu\\lib\\program.js:9757:36)",
+              "KernelHost.completeCallback (C:\\tmp\\ltably3k.4mu\\lib\\program.js:9744:33)",
+              "KernelHost.callbackHandler (C:\\tmp\\ltably3k.4mu\\lib\\program.js:9731:41)",
+              "AwsLogDriver.value (C:\\tmp\\ltably3k.4mu\\lib\\program.js:8601:49)",
+              "new ContainerDefinition (C:\\Users\\Alberto MD\\AppData\\Local\\Temp\\jsii-kernel-ZOcOq0\\node_modules\\@aws-cdk\\aws-ecs\\lib\\container-definition.js:116:50)",
+              "FargateTaskDefinition.addContainer (C:\\Users\\Alberto MD\\AppData\\Local\\Temp\\jsii-kernel-ZOcOq0\\node_modules\\@aws-cdk\\aws-ecs\\lib\\base\\task-definition.js:269:16)",
+              "C:\\tmp\\ltably3k.4mu\\lib\\program.js:8248:134",
+              "Kernel._wrapSandboxCode (C:\\tmp\\ltably3k.4mu\\lib\\program.js:8860:24)",
+              "C:\\tmp\\ltably3k.4mu\\lib\\program.js:8248:107",
+              "Kernel._ensureSync (C:\\tmp\\ltably3k.4mu\\lib\\program.js:8841:28)",
+              "Kernel.invoke (C:\\tmp\\ltably3k.4mu\\lib\\program.js:8248:34)",
+              "KernelHost.processRequest (C:\\tmp\\ltably3k.4mu\\lib\\program.js:9757:36)",
+              "KernelHost.run (C:\\tmp\\ltably3k.4mu\\lib\\program.js:9720:22)",
+              "Immediate._onImmediate (C:\\tmp\\ltably3k.4mu\\lib\\program.js:9721:46)",
+              "processImmediate (internal/timers.js:456:21)"
+            ]
+          }
+        ],
+        "/aspnetsix/Recipe/AppTaskDefinition/ExecutionRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "RecipeAppTaskDefinitionExecutionRole3EC094E2",
+            "trace": [
+              "new Role (C:\\Users\\Alberto MD\\AppData\\Local\\Temp\\jsii-kernel-ZOcOq0\\node_modules\\@aws-cdk\\aws-iam\\lib\\role.js:74:22)",
+              "FargateTaskDefinition.obtainExecutionRole (C:\\Users\\Alberto MD\\AppData\\Local\\Temp\\jsii-kernel-ZOcOq0\\node_modules\\@aws-cdk\\aws-ecs\\lib\\base\\task-definition.js:349:35)",
+              "EcrImage.bind (C:\\Users\\Alberto MD\\AppData\\Local\\Temp\\jsii-kernel-ZOcOq0\\node_modules\\@aws-cdk\\aws-ecs\\lib\\images\\ecr.js:37:70)",
+              "new ContainerDefinition (C:\\Users\\Alberto MD\\AppData\\Local\\Temp\\jsii-kernel-ZOcOq0\\node_modules\\@aws-cdk\\aws-ecs\\lib\\container-definition.js:114:40)",
+              "FargateTaskDefinition.addContainer (C:\\Users\\Alberto MD\\AppData\\Local\\Temp\\jsii-kernel-ZOcOq0\\node_modules\\@aws-cdk\\aws-ecs\\lib\\base\\task-definition.js:269:16)",
+              "C:\\tmp\\ltably3k.4mu\\lib\\program.js:8248:134",
+              "Kernel._wrapSandboxCode (C:\\tmp\\ltably3k.4mu\\lib\\program.js:8860:24)",
+              "C:\\tmp\\ltably3k.4mu\\lib\\program.js:8248:107",
+              "Kernel._ensureSync (C:\\tmp\\ltably3k.4mu\\lib\\program.js:8841:28)",
+              "Kernel.invoke (C:\\tmp\\ltably3k.4mu\\lib\\program.js:8248:34)",
+              "KernelHost.processRequest (C:\\tmp\\ltably3k.4mu\\lib\\program.js:9757:36)",
+              "KernelHost.run (C:\\tmp\\ltably3k.4mu\\lib\\program.js:9720:22)",
+              "Immediate._onImmediate (C:\\tmp\\ltably3k.4mu\\lib\\program.js:9721:46)",
+              "processImmediate (internal/timers.js:456:21)"
+            ]
+          }
+        ],
+        "/aspnetsix/Recipe/AppTaskDefinition/ExecutionRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "RecipeAppTaskDefinitionExecutionRoleDefaultPolicy93CAFD0F",
+            "trace": [
+              "new Policy (C:\\Users\\Alberto MD\\AppData\\Local\\Temp\\jsii-kernel-ZOcOq0\\node_modules\\@aws-cdk\\aws-iam\\lib\\policy.js:58:26)",
+              "Role.addToPrincipalPolicy (C:\\Users\\Alberto MD\\AppData\\Local\\Temp\\jsii-kernel-ZOcOq0\\node_modules\\@aws-cdk\\aws-iam\\lib\\role.js:213:34)",
+              "Function.addToPrincipal (C:\\Users\\Alberto MD\\AppData\\Local\\Temp\\jsii-kernel-ZOcOq0\\node_modules\\@aws-cdk\\aws-iam\\lib\\grant.js:93:65)",
+              "Function.addToPrincipalOrResource (C:\\Users\\Alberto MD\\AppData\\Local\\Temp\\jsii-kernel-ZOcOq0\\node_modules\\@aws-cdk\\aws-iam\\lib\\grant.js:47:30)",
+              "Import.grant (C:\\Users\\Alberto MD\\AppData\\Local\\Temp\\jsii-kernel-ZOcOq0\\node_modules\\@aws-cdk\\aws-ecr\\lib\\repository.js:157:26)",
+              "Import.grantPull (C:\\Users\\Alberto MD\\AppData\\Local\\Temp\\jsii-kernel-ZOcOq0\\node_modules\\@aws-cdk\\aws-ecr\\lib\\repository.js:171:26)",
+              "EcrImage.bind (C:\\Users\\Alberto MD\\AppData\\Local\\Temp\\jsii-kernel-ZOcOq0\\node_modules\\@aws-cdk\\aws-ecs\\lib\\images\\ecr.js:37:25)",
+              "new ContainerDefinition (C:\\Users\\Alberto MD\\AppData\\Local\\Temp\\jsii-kernel-ZOcOq0\\node_modules\\@aws-cdk\\aws-ecs\\lib\\container-definition.js:114:40)",
+              "FargateTaskDefinition.addContainer (C:\\Users\\Alberto MD\\AppData\\Local\\Temp\\jsii-kernel-ZOcOq0\\node_modules\\@aws-cdk\\aws-ecs\\lib\\base\\task-definition.js:269:16)",
+              "C:\\tmp\\ltably3k.4mu\\lib\\program.js:8248:134",
+              "Kernel._wrapSandboxCode (C:\\tmp\\ltably3k.4mu\\lib\\program.js:8860:24)",
+              "C:\\tmp\\ltably3k.4mu\\lib\\program.js:8248:107",
+              "Kernel._ensureSync (C:\\tmp\\ltably3k.4mu\\lib\\program.js:8841:28)",
+              "Kernel.invoke (C:\\tmp\\ltably3k.4mu\\lib\\program.js:8248:34)",
+              "KernelHost.processRequest (C:\\tmp\\ltably3k.4mu\\lib\\program.js:9757:36)",
+              "KernelHost.run (C:\\tmp\\ltably3k.4mu\\lib\\program.js:9720:22)",
+              "Immediate._onImmediate (C:\\tmp\\ltably3k.4mu\\lib\\program.js:9721:46)",
+              "processImmediate (internal/timers.js:456:21)"
+            ]
+          }
+        ],
+        "/aspnetsix/Recipe/WebAccessSecurityGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "RecipeWebAccessSecurityGroup5C596925",
+            "trace": [
+              "new SecurityGroup (C:\\Users\\Alberto MD\\AppData\\Local\\Temp\\jsii-kernel-ZOcOq0\\node_modules\\@aws-cdk\\aws-ec2\\lib\\security-group.js:228:30)",
+              "C:\\tmp\\ltably3k.4mu\\lib\\program.js:8432:58",
+              "Kernel._wrapSandboxCode (C:\\tmp\\ltably3k.4mu\\lib\\program.js:8860:24)",
+              "Kernel._create (C:\\tmp\\ltably3k.4mu\\lib\\program.js:8432:34)",
+              "Kernel.create (C:\\tmp\\ltably3k.4mu\\lib\\program.js:8173:29)",
+              "KernelHost.processRequest (C:\\tmp\\ltably3k.4mu\\lib\\program.js:9757:36)",
+              "KernelHost.run (C:\\tmp\\ltably3k.4mu\\lib\\program.js:9720:22)",
+              "Immediate._onImmediate (C:\\tmp\\ltably3k.4mu\\lib\\program.js:9721:46)",
+              "processImmediate (internal/timers.js:456:21)"
+            ]
+          }
+        ],
+        "/aspnetsix/Recipe/WebAccessSecurityGroup/from aspnetsixRecipeServiceLoadBalancerSecurityGroup8079E9E0:80": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "RecipeWebAccessSecurityGroupfromaspnetsixRecipeServiceLoadBalancerSecurityGroup8079E9E080F9754062",
+            "trace": [
+              "SecurityGroup.addIngressRule (C:\\Users\\Alberto MD\\AppData\\Local\\Temp\\jsii-kernel-ZOcOq0\\node_modules\\@aws-cdk\\aws-ec2\\lib\\security-group.js:59:13)",
+              "SecurityGroup.addIngressRule (C:\\Users\\Alberto MD\\AppData\\Local\\Temp\\jsii-kernel-ZOcOq0\\node_modules\\@aws-cdk\\aws-ec2\\lib\\security-group.js:352:19)",
+              "C:\\tmp\\ltably3k.4mu\\lib\\program.js:8248:134",
+              "Kernel._wrapSandboxCode (C:\\tmp\\ltably3k.4mu\\lib\\program.js:8860:24)",
+              "C:\\tmp\\ltably3k.4mu\\lib\\program.js:8248:107",
+              "Kernel._ensureSync (C:\\tmp\\ltably3k.4mu\\lib\\program.js:8841:28)",
+              "Kernel.invoke (C:\\tmp\\ltably3k.4mu\\lib\\program.js:8248:34)",
+              "KernelHost.processRequest (C:\\tmp\\ltably3k.4mu\\lib\\program.js:9757:36)",
+              "KernelHost.completeCallback (C:\\tmp\\ltably3k.4mu\\lib\\program.js:9744:33)",
+              "KernelHost.callbackHandler (C:\\tmp\\ltably3k.4mu\\lib\\program.js:9731:41)",
+              "SecurityGroup.value (C:\\tmp\\ltably3k.4mu\\lib\\program.js:8601:49)",
+              "C:\\Users\\Alberto MD\\AppData\\Local\\Temp\\jsii-kernel-ZOcOq0\\node_modules\\@aws-cdk\\aws-ec2\\lib\\connections.js:113:31",
+              "ReactiveList.forEachAndForever (C:\\Users\\Alberto MD\\AppData\\Local\\Temp\\jsii-kernel-ZOcOq0\\node_modules\\@aws-cdk\\aws-ec2\\lib\\connections.js:239:13)",
+              "C:\\Users\\Alberto MD\\AppData\\Local\\Temp\\jsii-kernel-ZOcOq0\\node_modules\\@aws-cdk\\aws-ec2\\lib\\connections.js:112:51",
+              "ReactiveList.forEachAndForever (C:\\Users\\Alberto MD\\AppData\\Local\\Temp\\jsii-kernel-ZOcOq0\\node_modules\\@aws-cdk\\aws-ec2\\lib\\connections.js:239:13)",
+              "Connections.allowFrom (C:\\Users\\Alberto MD\\AppData\\Local\\Temp\\jsii-kernel-ZOcOq0\\node_modules\\@aws-cdk\\aws-ec2\\lib\\connections.js:111:30)",
+              "ApplicationListener.registerConnectable (C:\\Users\\Alberto MD\\AppData\\Local\\Temp\\jsii-kernel-ZOcOq0\\node_modules\\@aws-cdk\\aws-elasticloadbalancingv2\\lib\\alb\\application-listener.js:313:33)",
+              "ApplicationTargetGroup.registerConnectable (C:\\Users\\Alberto MD\\AppData\\Local\\Temp\\jsii-kernel-ZOcOq0\\node_modules\\@aws-cdk\\aws-elasticloadbalancingv2\\lib\\alb\\application-target-group.js:132:22)",
+              "Object.attachToApplicationTargetGroup (C:\\Users\\Alberto MD\\AppData\\Local\\Temp\\jsii-kernel-ZOcOq0\\node_modules\\@aws-cdk\\aws-ecs\\lib\\base\\base-service.js:329:29)",
+              "FargateService.attachToApplicationTargetGroup (C:\\Users\\Alberto MD\\AppData\\Local\\Temp\\jsii-kernel-ZOcOq0\\node_modules\\@aws-cdk\\aws-ecs\\lib\\base\\base-service.js:287:47)",
+              "C:\\tmp\\ltably3k.4mu\\lib\\program.js:8248:134",
+              "Kernel._wrapSandboxCode (C:\\tmp\\ltably3k.4mu\\lib\\program.js:8860:24)",
+              "C:\\tmp\\ltably3k.4mu\\lib\\program.js:8248:107",
+              "Kernel._ensureSync (C:\\tmp\\ltably3k.4mu\\lib\\program.js:8841:28)",
+              "Kernel.invoke (C:\\tmp\\ltably3k.4mu\\lib\\program.js:8248:34)",
+              "KernelHost.processRequest (C:\\tmp\\ltably3k.4mu\\lib\\program.js:9757:36)",
+              "KernelHost.completeCallback (C:\\tmp\\ltably3k.4mu\\lib\\program.js:9744:33)",
+              "KernelHost.callbackHandler (C:\\tmp\\ltably3k.4mu\\lib\\program.js:9731:41)",
+              "FargateService.value (C:\\tmp\\ltably3k.4mu\\lib\\program.js:8601:49)",
+              "ApplicationTargetGroup.addTarget (C:\\Users\\Alberto MD\\AppData\\Local\\Temp\\jsii-kernel-ZOcOq0\\node_modules\\@aws-cdk\\aws-elasticloadbalancingv2\\lib\\alb\\application-target-group.js:83:35)",
+              "C:\\tmp\\ltably3k.4mu\\lib\\program.js:8248:134",
+              "Kernel._wrapSandboxCode (C:\\tmp\\ltably3k.4mu\\lib\\program.js:8860:24)",
+              "C:\\tmp\\ltably3k.4mu\\lib\\program.js:8248:107",
+              "Kernel._ensureSync (C:\\tmp\\ltably3k.4mu\\lib\\program.js:8841:28)",
+              "Kernel.invoke (C:\\tmp\\ltably3k.4mu\\lib\\program.js:8248:34)",
+              "KernelHost.processRequest (C:\\tmp\\ltably3k.4mu\\lib\\program.js:9757:36)",
+              "KernelHost.run (C:\\tmp\\ltably3k.4mu\\lib\\program.js:9720:22)",
+              "Immediate._onImmediate (C:\\tmp\\ltably3k.4mu\\lib\\program.js:9721:46)",
+              "processImmediate (internal/timers.js:456:21)"
+            ]
+          }
+        ],
+        "/aspnetsix/Recipe/AppFargateService/Service": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "RecipeAppFargateService71FD6243",
+            "trace": [
+              "new BaseService (C:\\Users\\Alberto MD\\AppData\\Local\\Temp\\jsii-kernel-ZOcOq0\\node_modules\\@aws-cdk\\aws-ecs\\lib\\base\\base-service.js:145:25)",
+              "new FargateService (C:\\Users\\Alberto MD\\AppData\\Local\\Temp\\jsii-kernel-ZOcOq0\\node_modules\\@aws-cdk\\aws-ecs\\lib\\fargate\\fargate-service.js:37:9)",
+              "C:\\tmp\\ltably3k.4mu\\lib\\program.js:8432:58",
+              "Kernel._wrapSandboxCode (C:\\tmp\\ltably3k.4mu\\lib\\program.js:8860:24)",
+              "Kernel._create (C:\\tmp\\ltably3k.4mu\\lib\\program.js:8432:34)",
+              "Kernel.create (C:\\tmp\\ltably3k.4mu\\lib\\program.js:8173:29)",
+              "KernelHost.processRequest (C:\\tmp\\ltably3k.4mu\\lib\\program.js:9757:36)",
+              "KernelHost.run (C:\\tmp\\ltably3k.4mu\\lib\\program.js:9720:22)",
+              "Immediate._onImmediate (C:\\tmp\\ltably3k.4mu\\lib\\program.js:9721:46)",
+              "processImmediate (internal/timers.js:456:21)"
+            ]
+          }
+        ],
+        "/aspnetsix/Recipe/ServiceLoadBalancer/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "RecipeServiceLoadBalancer68534AEF",
+            "trace": [
+              "new BaseLoadBalancer (C:\\Users\\Alberto MD\\AppData\\Local\\Temp\\jsii-kernel-ZOcOq0\\node_modules\\@aws-cdk\\aws-elasticloadbalancingv2\\lib\\shared\\base-load-balancer.js:37:26)",
+              "new ApplicationLoadBalancer (C:\\Users\\Alberto MD\\AppData\\Local\\Temp\\jsii-kernel-ZOcOq0\\node_modules\\@aws-cdk\\aws-elasticloadbalancingv2\\lib\\alb\\application-load-balancer.js:29:9)",
+              "C:\\tmp\\ltably3k.4mu\\lib\\program.js:8432:58",
+              "Kernel._wrapSandboxCode (C:\\tmp\\ltably3k.4mu\\lib\\program.js:8860:24)",
+              "Kernel._create (C:\\tmp\\ltably3k.4mu\\lib\\program.js:8432:34)",
+              "Kernel.create (C:\\tmp\\ltably3k.4mu\\lib\\program.js:8173:29)",
+              "KernelHost.processRequest (C:\\tmp\\ltably3k.4mu\\lib\\program.js:9757:36)",
+              "KernelHost.run (C:\\tmp\\ltably3k.4mu\\lib\\program.js:9720:22)",
+              "Immediate._onImmediate (C:\\tmp\\ltably3k.4mu\\lib\\program.js:9721:46)",
+              "processImmediate (internal/timers.js:456:21)"
+            ]
+          }
+        ],
+        "/aspnetsix/Recipe/ServiceLoadBalancer/SecurityGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "RecipeServiceLoadBalancerSecurityGroup546712AE",
+            "trace": [
+              "new SecurityGroup (C:\\Users\\Alberto MD\\AppData\\Local\\Temp\\jsii-kernel-ZOcOq0\\node_modules\\@aws-cdk\\aws-ec2\\lib\\security-group.js:228:30)",
+              "new ApplicationLoadBalancer (C:\\Users\\Alberto MD\\AppData\\Local\\Temp\\jsii-kernel-ZOcOq0\\node_modules\\@aws-cdk\\aws-elasticloadbalancingv2\\lib\\alb\\application-load-balancer.js:36:56)",
+              "C:\\tmp\\ltably3k.4mu\\lib\\program.js:8432:58",
+              "Kernel._wrapSandboxCode (C:\\tmp\\ltably3k.4mu\\lib\\program.js:8860:24)",
+              "Kernel._create (C:\\tmp\\ltably3k.4mu\\lib\\program.js:8432:34)",
+              "Kernel.create (C:\\tmp\\ltably3k.4mu\\lib\\program.js:8173:29)",
+              "KernelHost.processRequest (C:\\tmp\\ltably3k.4mu\\lib\\program.js:9757:36)",
+              "KernelHost.run (C:\\tmp\\ltably3k.4mu\\lib\\program.js:9720:22)",
+              "Immediate._onImmediate (C:\\tmp\\ltably3k.4mu\\lib\\program.js:9721:46)",
+              "processImmediate (internal/timers.js:456:21)"
+            ]
+          }
+        ],
+        "/aspnetsix/Recipe/ServiceLoadBalancer/SecurityGroup/to aspnetsixRecipeWebAccessSecurityGroupAF53D8B4:80": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "RecipeServiceLoadBalancerSecurityGrouptoaspnetsixRecipeWebAccessSecurityGroupAF53D8B480DB1F4CAA",
+            "trace": [
+              "SecurityGroup.addEgressRule (C:\\Users\\Alberto MD\\AppData\\Local\\Temp\\jsii-kernel-ZOcOq0\\node_modules\\@aws-cdk\\aws-ec2\\lib\\security-group.js:74:13)",
+              "SecurityGroup.addEgressRule (C:\\Users\\Alberto MD\\AppData\\Local\\Temp\\jsii-kernel-ZOcOq0\\node_modules\\@aws-cdk\\aws-ec2\\lib\\security-group.js:394:19)",
+              "C:\\Users\\Alberto MD\\AppData\\Local\\Temp\\jsii-kernel-ZOcOq0\\node_modules\\@aws-cdk\\aws-ec2\\lib\\connections.js:86:31",
+              "ReactiveList.forEachAndForever (C:\\Users\\Alberto MD\\AppData\\Local\\Temp\\jsii-kernel-ZOcOq0\\node_modules\\@aws-cdk\\aws-ec2\\lib\\connections.js:239:13)",
+              "C:\\Users\\Alberto MD\\AppData\\Local\\Temp\\jsii-kernel-ZOcOq0\\node_modules\\@aws-cdk\\aws-ec2\\lib\\connections.js:85:51",
+              "ReactiveList.forEachAndForever (C:\\Users\\Alberto MD\\AppData\\Local\\Temp\\jsii-kernel-ZOcOq0\\node_modules\\@aws-cdk\\aws-ec2\\lib\\connections.js:239:13)",
+              "Connections.allowTo (C:\\Users\\Alberto MD\\AppData\\Local\\Temp\\jsii-kernel-ZOcOq0\\node_modules\\@aws-cdk\\aws-ec2\\lib\\connections.js:84:30)",
+              "Connections.allowFrom (C:\\Users\\Alberto MD\\AppData\\Local\\Temp\\jsii-kernel-ZOcOq0\\node_modules\\@aws-cdk\\aws-ec2\\lib\\connections.js:119:31)",
+              "ApplicationListener.registerConnectable (C:\\Users\\Alberto MD\\AppData\\Local\\Temp\\jsii-kernel-ZOcOq0\\node_modules\\@aws-cdk\\aws-elasticloadbalancingv2\\lib\\alb\\application-listener.js:313:33)",
+              "ApplicationTargetGroup.registerConnectable (C:\\Users\\Alberto MD\\AppData\\Local\\Temp\\jsii-kernel-ZOcOq0\\node_modules\\@aws-cdk\\aws-elasticloadbalancingv2\\lib\\alb\\application-target-group.js:132:22)",
+              "Object.attachToApplicationTargetGroup (C:\\Users\\Alberto MD\\AppData\\Local\\Temp\\jsii-kernel-ZOcOq0\\node_modules\\@aws-cdk\\aws-ecs\\lib\\base\\base-service.js:329:29)",
+              "FargateService.attachToApplicationTargetGroup (C:\\Users\\Alberto MD\\AppData\\Local\\Temp\\jsii-kernel-ZOcOq0\\node_modules\\@aws-cdk\\aws-ecs\\lib\\base\\base-service.js:287:47)",
+              "C:\\tmp\\ltably3k.4mu\\lib\\program.js:8248:134",
+              "Kernel._wrapSandboxCode (C:\\tmp\\ltably3k.4mu\\lib\\program.js:8860:24)",
+              "C:\\tmp\\ltably3k.4mu\\lib\\program.js:8248:107",
+              "Kernel._ensureSync (C:\\tmp\\ltably3k.4mu\\lib\\program.js:8841:28)",
+              "Kernel.invoke (C:\\tmp\\ltably3k.4mu\\lib\\program.js:8248:34)",
+              "KernelHost.processRequest (C:\\tmp\\ltably3k.4mu\\lib\\program.js:9757:36)",
+              "KernelHost.completeCallback (C:\\tmp\\ltably3k.4mu\\lib\\program.js:9744:33)",
+              "KernelHost.callbackHandler (C:\\tmp\\ltably3k.4mu\\lib\\program.js:9731:41)",
+              "FargateService.value (C:\\tmp\\ltably3k.4mu\\lib\\program.js:8601:49)",
+              "ApplicationTargetGroup.addTarget (C:\\Users\\Alberto MD\\AppData\\Local\\Temp\\jsii-kernel-ZOcOq0\\node_modules\\@aws-cdk\\aws-elasticloadbalancingv2\\lib\\alb\\application-target-group.js:83:35)",
+              "C:\\tmp\\ltably3k.4mu\\lib\\program.js:8248:134",
+              "Kernel._wrapSandboxCode (C:\\tmp\\ltably3k.4mu\\lib\\program.js:8860:24)",
+              "C:\\tmp\\ltably3k.4mu\\lib\\program.js:8248:107",
+              "Kernel._ensureSync (C:\\tmp\\ltably3k.4mu\\lib\\program.js:8841:28)",
+              "Kernel.invoke (C:\\tmp\\ltably3k.4mu\\lib\\program.js:8248:34)",
+              "KernelHost.processRequest (C:\\tmp\\ltably3k.4mu\\lib\\program.js:9757:36)",
+              "KernelHost.run (C:\\tmp\\ltably3k.4mu\\lib\\program.js:9720:22)",
+              "Immediate._onImmediate (C:\\tmp\\ltably3k.4mu\\lib\\program.js:9721:46)",
+              "processImmediate (internal/timers.js:456:21)"
+            ]
+          }
+        ],
+        "/aspnetsix/Recipe/ServiceLoadBalancer/LoadBalancerListener/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "RecipeServiceLoadBalancerLoadBalancerListenerF9AD1C9F",
+            "trace": [
+              "new BaseListener (C:\\Users\\Alberto MD\\AppData\\Local\\Temp\\jsii-kernel-ZOcOq0\\node_modules\\@aws-cdk\\aws-elasticloadbalancingv2\\lib\\shared\\base-listener.js:21:26)",
+              "new ApplicationListener (C:\\Users\\Alberto MD\\AppData\\Local\\Temp\\jsii-kernel-ZOcOq0\\node_modules\\@aws-cdk\\aws-elasticloadbalancingv2\\lib\\alb\\application-listener.js:34:9)",
+              "ApplicationLoadBalancer.addListener (C:\\Users\\Alberto MD\\AppData\\Local\\Temp\\jsii-kernel-ZOcOq0\\node_modules\\@aws-cdk\\aws-elasticloadbalancingv2\\lib\\alb\\application-load-balancer.js:79:26)",
+              "C:\\tmp\\ltably3k.4mu\\lib\\program.js:8248:134",
+              "Kernel._wrapSandboxCode (C:\\tmp\\ltably3k.4mu\\lib\\program.js:8860:24)",
+              "C:\\tmp\\ltably3k.4mu\\lib\\program.js:8248:107",
+              "Kernel._ensureSync (C:\\tmp\\ltably3k.4mu\\lib\\program.js:8841:28)",
+              "Kernel.invoke (C:\\tmp\\ltably3k.4mu\\lib\\program.js:8248:34)",
+              "KernelHost.processRequest (C:\\tmp\\ltably3k.4mu\\lib\\program.js:9757:36)",
+              "KernelHost.run (C:\\tmp\\ltably3k.4mu\\lib\\program.js:9720:22)",
+              "Immediate._onImmediate (C:\\tmp\\ltably3k.4mu\\lib\\program.js:9721:46)",
+              "processImmediate (internal/timers.js:456:21)"
+            ]
+          }
+        ],
+        "/aspnetsix/Recipe/ServiceLoadBalancer/LoadBalancerListener/ServiceTargetGroupGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "RecipeServiceLoadBalancerLoadBalancerListenerServiceTargetGroupGroupC1883CA9",
+            "trace": [
+              "new TargetGroupBase (C:\\Users\\Alberto MD\\AppData\\Local\\Temp\\jsii-kernel-ZOcOq0\\node_modules\\@aws-cdk\\aws-elasticloadbalancingv2\\lib\\shared\\base-target-group.js:46:25)",
+              "new ApplicationTargetGroup (C:\\Users\\Alberto MD\\AppData\\Local\\Temp\\jsii-kernel-ZOcOq0\\node_modules\\@aws-cdk\\aws-elasticloadbalancingv2\\lib\\alb\\application-target-group.js:28:9)",
+              "ApplicationListener.addTargets (C:\\Users\\Alberto MD\\AppData\\Local\\Temp\\jsii-kernel-ZOcOq0\\node_modules\\@aws-cdk\\aws-elasticloadbalancingv2\\lib\\alb\\application-listener.js:228:23)",
+              "C:\\tmp\\ltably3k.4mu\\lib\\program.js:8248:134",
+              "Kernel._wrapSandboxCode (C:\\tmp\\ltably3k.4mu\\lib\\program.js:8860:24)",
+              "C:\\tmp\\ltably3k.4mu\\lib\\program.js:8248:107",
+              "Kernel._ensureSync (C:\\tmp\\ltably3k.4mu\\lib\\program.js:8841:28)",
+              "Kernel.invoke (C:\\tmp\\ltably3k.4mu\\lib\\program.js:8248:34)",
+              "KernelHost.processRequest (C:\\tmp\\ltably3k.4mu\\lib\\program.js:9757:36)",
+              "KernelHost.run (C:\\tmp\\ltably3k.4mu\\lib\\program.js:9720:22)",
+              "Immediate._onImmediate (C:\\tmp\\ltably3k.4mu\\lib\\program.js:9721:46)",
+              "processImmediate (internal/timers.js:456:21)"
+            ]
+          }
+        ],
+        "/aspnetsix/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata",
+            "trace": [
+              "new MetadataResource (C:\\Users\\Alberto MD\\AppData\\Local\\Temp\\jsii-kernel-ZOcOq0\\node_modules\\@aws-cdk\\core\\lib\\private\\metadata-resource.js:22:30)",
+              "C:\\Users\\Alberto MD\\AppData\\Local\\Temp\\jsii-kernel-ZOcOq0\\node_modules\\@aws-cdk\\core\\lib\\private\\synthesis.js:139:9",
+              "visit (C:\\Users\\Alberto MD\\AppData\\Local\\Temp\\jsii-kernel-ZOcOq0\\node_modules\\@aws-cdk\\core\\lib\\private\\synthesis.js:200:9)",
+              "visit (C:\\Users\\Alberto MD\\AppData\\Local\\Temp\\jsii-kernel-ZOcOq0\\node_modules\\@aws-cdk\\core\\lib\\private\\synthesis.js:197:9)",
+              "injectMetadataResources (C:\\Users\\Alberto MD\\AppData\\Local\\Temp\\jsii-kernel-ZOcOq0\\node_modules\\@aws-cdk\\core\\lib\\private\\synthesis.js:128:5)",
+              "Object.synthesize (C:\\Users\\Alberto MD\\AppData\\Local\\Temp\\jsii-kernel-ZOcOq0\\node_modules\\@aws-cdk\\core\\lib\\private\\synthesis.js:17:5)",
+              "App.synth (C:\\Users\\Alberto MD\\AppData\\Local\\Temp\\jsii-kernel-ZOcOq0\\node_modules\\@aws-cdk\\core\\lib\\stage.js:103:41)",
+              "C:\\tmp\\ltably3k.4mu\\lib\\program.js:8248:134",
+              "Kernel._wrapSandboxCode (C:\\tmp\\ltably3k.4mu\\lib\\program.js:8860:24)",
+              "C:\\tmp\\ltably3k.4mu\\lib\\program.js:8248:107",
+              "Kernel._ensureSync (C:\\tmp\\ltably3k.4mu\\lib\\program.js:8841:28)",
+              "Kernel.invoke (C:\\tmp\\ltably3k.4mu\\lib\\program.js:8248:34)",
+              "KernelHost.processRequest (C:\\tmp\\ltably3k.4mu\\lib\\program.js:9757:36)",
+              "KernelHost.run (C:\\tmp\\ltably3k.4mu\\lib\\program.js:9720:22)",
+              "Immediate._onImmediate (C:\\tmp\\ltably3k.4mu\\lib\\program.js:9721:46)",
+              "processImmediate (internal/timers.js:456:21)"
+            ]
+          }
+        ]
+      },
+      "displayName": "aspnetsix"
+    }
+  }
+}
